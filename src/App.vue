@@ -9,7 +9,6 @@
 <script>
 
 import VChinamap from './components/ChinaMap'
-// 测试git提交
 export default {
   name: 'App',
   components:{
