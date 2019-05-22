@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 import VChinamap from './components/ChinaMap'
 export default {
   name: 'App',
