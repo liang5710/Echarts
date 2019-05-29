@@ -1,13 +1,27 @@
 <template>
-  <div id="myChart" :style="{ width: '100%', height: '600px' }"></div>
+  <div>
+    <div id="myChart" :style="{ width: '100%', height: '600px' }"></div>
+    <my-dialog :is-show="isShow" @on-close="openDialog">
+      <span>点击获取参数</span>
+      <br />
+      <span>{{ params.data }}</span>
+    </my-dialog>
+  </div>
 </template>
 
 <script>
 import _ from "lodash";
 import echarts from "echarts";
+import MyDialog from "../../components/base/Dialog";
 export default {
+  components: {
+    MyDialog
+  },
   data() {
-    return {};
+    return {
+      isShow: false,
+      params: []
+    };
   },
   mounted() {
     this.drawLine();
@@ -57,7 +71,7 @@ export default {
               normal: {
                 show: false,
                 position: "center",
-                formatter: "{b}:{c}ml({d}%)"
+                formatter: "{a} \n {b}:{c}ml({d}%)"
               },
               emphasis: {
                 //中间显示内容
@@ -89,6 +103,15 @@ export default {
           }
         });
       });
+
+      myChart.on("click", paras => {
+        this.isShow = !this.isShow;
+        console.log(paras);
+        this.params = paras;
+      });
+    },
+    openDialog() {
+      this.isShow = !this.isShow;
     }
   }
 };
